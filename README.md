@@ -11,18 +11,7 @@ A web scraper for [books.toscrape.com](https://books.toscrape.com) that extracts
 
 ## 📦 Structure
 
-books_scraper/
-├── main.py
-├── scraper/
-│ ├── fetcher.py
-│ ├── parser.py
-│ └── exporter.py
-├── utils/
-│ └── logger.py
-├── output/
-├── tests/
-├── requirements.txt
-└── README.md
+<pre> ``` books_scraper/ ├── README.md ├── requirements.txt ├── main.py ├── config.py ├── scraper/ │ ├── __init__.py │ ├── fetcher.py │ ├── parser.py │ └── exporter.py ├── utils/ │ ├── __init__.py │ └── logger.py ├── tests/ │ ├── test_parser.py │ ├── test_filters.py │ ├── test_exporter.py │ └── sample_page.html ├── output/ │ └── products.json ``` </pre>
 
 
 ## ⚙️ Usage
@@ -39,19 +28,3 @@ python main.py --min-price 10 --max-price 30
 
 # Export to CSV
 python main.py --output-format csv --output-file output/books
-
-
----
-
-## 🧪 (Bonus) `tests/test_parser.py`
-
-# ```python
-# from scraper.parser import parse_products
-
-# def test_parse_products():
-#     with open("tests/sample_page.html", encoding="utf-8") as f:
-#         html = f.read()
-#     products = parse_products(html)
-#     assert len(products) > 0
-#     assert "title" in products[0]
-#     assert "price" in products[0]
