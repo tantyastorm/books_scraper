@@ -1,12 +1,11 @@
 import requests
-from utils.logger import log
-
 
 def fetch_page(url):
-    try:
-        response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
-        response.raise_for_status()
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+    response = requests.get(url, headers=headers)
+    response.encoding = "utf-8"
+    if response.status_code == 200:
         return response.text
-    except requests.RequestException as e:
-        log(f"Error fetching URL: {e}")
-        return ""
+    return None

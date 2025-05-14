@@ -1,29 +1,21 @@
 from bs4 import BeautifulSoup
-import re
 
 def parse_products(html):
     soup = BeautifulSoup(html, "lxml")
-    product_list = []
+    items = soup.select(".product_pod")
+    products = []
 
-    products = soup.select("article.product_pod")
-    print(f"[DEBUG] Found {len(products)} product cards.")
+    for item in items:
+        title = item.h3.a["title"]
+        price_str = item.select_one(".price_color").text.strip()
+        price = float(price_str.replace("£", "").strip())
+        stock = item.select_one(".instock.availability").text.strip()
+        img_url = "https://books.toscrape.com/" + item.img["src"].replace("../", "")
 
-    for article in products:
-        title_tag = article.h3.a
-        title = title_tag["title"] if title_tag else "N/A"
-
-        price_tag = article.select_one("p.price_color")
-        if price_tag:
-            price_text = price_tag.text.strip()
-            price_match = re.search(r"[\d.]+", price_text)
-            price = float(price_match.group()) if price_match else 0.0
-        else:
-            price = 0.0
-
-        product_list.append({
+        products.append({
             "title": title,
-            "price": price
+            "price": price,
+            "stock": stock,
+            "image_url": img_url
         })
-
-    return product_list
-
+    return products

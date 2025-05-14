@@ -1,16 +1,21 @@
-import unittest
+import os
 from scraper.parser import parse_products
-from bs4 import BeautifulSoup
 
-class TestParser(unittest.TestCase):
-    def test_parse_sample_html(self):
-        html = '''<html>...mocked HTML snippet of a product...</html>'''
-        soup = BeautifulSoup(html, "lxml")
-        result = parse_products(soup)
-        self.assertIsInstance(result, list)
-        self.assertGreater(len(result), 0)
-        self.assertIn("title", result[0])
-        self.assertIn("price", result[0])
+def test_parse_products():
+    # Путь к sample_page.html
+    test_file_path = os.path.join(os.path.dirname(__file__), "sample_page.html")
 
-if __name__ == "__main__":
-    unittest.main()
+    with open(test_file_path, encoding="utf-8") as f:
+        html = f.read()
+
+    products = parse_products(html)
+
+    assert isinstance(products, list), "Should return a list"
+    assert len(products) > 0, "Should extract at least one product"
+    
+    product = products[0]
+    assert "title" in product, "Product should have a title"
+    assert "price" in product, "Product should have a price"
+    assert isinstance(product["price"], float), "Price should be a float"
+    assert "stock" in product, "Product should have stock info"
+    assert "image_url" in product, "Product should have image URL"
