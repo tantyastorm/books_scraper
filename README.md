@@ -11,7 +11,27 @@ A web scraper for [books.toscrape.com](https://books.toscrape.com) that extracts
 
 ## 📦 Structure
 
-<pre> ``` books_scraper/ ├── README.md ├── requirements.txt ├── main.py ├── config.py ├── scraper/ │ ├── __init__.py │ ├── fetcher.py │ ├── parser.py │ └── exporter.py ├── utils/ │ ├── __init__.py │ └── logger.py ├── tests/ │ ├── test_parser.py │ ├── test_filters.py │ ├── test_exporter.py │ └── sample_page.html ├── output/ │ └── products.json ``` </pre>
+<pre> ``` 
+  books_scraper/ 
+  ├── README.md 
+  ├── requirements.txt 
+  ├── main.py 
+  ├── config.py 
+  ├── scraper/ 
+  │ ├── __init__.py 
+  │ ├── fetcher.py 
+  │ ├── parser.py 
+  │ └── exporter.py 
+  ├── utils/ 
+  │ ├── __init__.py 
+  │ └── logger.py 
+  ├── tests/ 
+  │ ├── test_parser.py 
+  │ ├── test_filters.py 
+  │ ├── test_exporter.py 
+  │ └── sample_page.html 
+  ├── output/ 
+  │ └── products.json ``` </pre>
 
 
 ## ⚙️ Usage
